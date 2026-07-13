@@ -1,0 +1,9 @@
+# Extracted from geoindex-model/configs/io/in2d_out12h.yaml @ 2d89767.
+# 2-day input (96 steps) → 12-hour output (24 steps).
+
+data:
+  timeseries:
+    input_start: -96
+    input_end: 0
+    target_start: 0
+    target_end: 24

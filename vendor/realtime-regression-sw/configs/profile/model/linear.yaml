@@ -1,0 +1,4 @@
+# Flattened linear baseline.
+
+model:
+  model_type: "linear"

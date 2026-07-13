@@ -1,0 +1,5 @@
+# GNN encoder with PatchTST temporal backend.
+
+model:
+  model_type: "gnn"
+  gnn_temporal_type: "patch_transformer"

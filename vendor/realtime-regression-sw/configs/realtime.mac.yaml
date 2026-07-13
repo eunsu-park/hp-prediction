@@ -1,0 +1,62 @@
+# macOS / Linux variant — in12h_out12h_gnn_patchtst profile.
+# Workspace: /Users/eunsupark/realtime/ with the standard layout
+# (checkpoint/, dataset/, results/ under the root).
+#
+# Usage:
+#   python scripts/run_realtime.py --config configs/realtime.mac.yaml
+
+profile:
+  name: "in12h_out12h_gnn_patchtst"
+  io: "in12h_out12h"         # 12-hour input (24 steps), 12-hour (24-step) output
+  model: "gnn_patchtst"      # GNN with PatchTST temporal backend
+
+experiment:
+  name: "in12h_out12h_gnn_patchtst"
+
+paths:
+  checkpoint: "/Users/eunsupark/realtime/checkpoint/model_best.pth"
+  stats_file: "/Users/eunsupark/realtime/checkpoint/table_stats.pkl"
+  event_dir: "/Users/eunsupark/realtime/dataset/events"
+  cache_dir: "/Users/eunsupark/realtime/dataset/cache"
+  results_dir: "/Users/eunsupark/realtime/results"
+
+sources:
+  noaa_plasma_url: "https://services.swpc.noaa.gov/json/rtsw/rtsw_wind_1m.json"
+  noaa_mag_url:    "https://services.swpc.noaa.gov/json/rtsw/rtsw_mag_1m.json"
+  gfz_hpo_url:     "https://www-app3.gfz-potsdam.de/kp_index/Hp30_ap30_nowcast.txt"
+  download_timeout: 30
+  max_retries: 3
+
+window:
+  lookback_steps: 24         # 12 hours × 2 steps/hour
+  forecast_steps: 24         # 12 hours × 2 steps/hour
+  boundary_offset_minutes: 2
+
+runtime:
+  device: "cpu"
+  missing_data:
+    max_gap_fraction: 0.10
+    ffill_limit_steps: 2
+    require_recent_steps_present: 3
+    anchor_rollback_max_attempts: 2
+
+analysis:
+  plot:
+    enable: true
+    history_steps: 96
+    dpi: 120
+  mcd:
+    enable: true
+    num_samples: 100
+    n_std: 2.0
+  attention:
+    enable: true
+    save_npz: true
+
+# Reference metrics for the default checkpoint (reported at provenance time).
+# Values taken from in12h_out12h_gnn_patchtst/log/training_history.json (epoch 9).
+model_provenance:
+  val_loss_at_train: 0.245454
+  val_mae_at_train: 0.3781     # ap30-specific MAE
+  val_rmse_at_train: 0.4956    # ap30-specific RMSE
+  trained_on_epoch: 9

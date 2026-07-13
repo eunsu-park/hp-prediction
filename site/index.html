@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>hp30 Forecast</title>
+<meta name="description" content="12-hour hp30 geomagnetic index forecast, updated every 30 minutes.">
+
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@3.0.0/dist/chartjs-adapter-date-fns.bundle.min.js" defer></script>
+
+<style>
+  :root {
+    --fg: #1a1a1a;
+    --fg-muted: #6b7280;
+    --bg: #fafafa;
+    --card: #ffffff;
+    --border: #e5e7eb;
+    --accent: #2563eb;
+    --ok: #16a34a;
+    --warn: #d97706;
+    --error: #dc2626;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 1.5rem;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    color: var(--fg);
+    background: var(--bg);
+    line-height: 1.5;
+  }
+  .container { max-width: 960px; margin: 0 auto; }
+  header { margin-bottom: 1.5rem; }
+  header h1 { margin: 0; font-size: 1.75rem; }
+  header p { margin: 0.25rem 0 0; color: var(--fg-muted); }
+
+  .status-banner {
+    padding: 0.75rem 1rem;
+    border-radius: 6px;
+    margin-bottom: 1rem;
+    font-size: 0.95rem;
+    display: none;
+  }
+  .status-banner.ok    { background: #dcfce7; color: #14532d; display: block; }
+  .status-banner.warn  { background: #fef3c7; color: #78350f; display: block; }
+  .status-banner.error { background: #fee2e2; color: #7f1d1d; display: block; }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1rem 1.25rem;
+    margin-bottom: 1rem;
+  }
+  .meta { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 0.5rem 1.5rem; }
+  .meta .row { display: flex; justify-content: space-between; border-bottom: 1px dashed var(--border); padding: 0.35rem 0; }
+  .meta .row:last-child { border-bottom: none; }
+  .meta .label { color: var(--fg-muted); font-size: 0.9rem; }
+  .meta .value { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.9rem; }
+
+  .chart-wrap { position: relative; height: 360px; }
+
+  footer { margin-top: 1.5rem; font-size: 0.85rem; color: var(--fg-muted); }
+  footer a { color: var(--accent); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <header>
+    <h1>hp30 Forecast</h1>
+    <p>12-hour hp30 forecast from <code>realtime-regression-sw</code>, updated every 30 minutes.</p>
+  </header>
+
+  <div id="status-banner" class="status-banner"></div>
+
+  <section class="card">
+    <div class="chart-wrap">
+      <canvas id="forecast-chart"></canvas>
+    </div>
+  </section>
+
+  <footer>
+    <div>Data Source: <a href="https://www.swpc.noaa.gov/">NOAA SWPC</a> + <a href="https://kp.gfz.de/">GFZ Hp30/ap30</a>.</div>
+    <div>Repo: <a href="https://github.com/eunsu-park/hp-prediction">github.com/eunsu-park/hp-prediction</a>.</div>
+    <div>Last fetched (UTC): <span id="last-fetched">—</span>.</div>
+    <div style="margin-top: 0.75rem; padding-top: 0.75rem; border-top: 1px solid var(--border);">
+      Developed by:
+      <div>Eunsu Park / Korea Astronomy and Space Science Institute (KASI) / <a href="mailto:eunsupark@kasi.re.kr">eunsupark@kasi.re.kr</a></div>
+      <div>Harim Lee / New Jersey Institute of Technology (NJIT) / <a href="mailto:harim.lee@njit.edu">harim.lee@njit.edu</a></div>
+    </div>
+  </footer>
+
+</div>
+
+<script src="./main.js" defer></script>
+</body>
+</html>

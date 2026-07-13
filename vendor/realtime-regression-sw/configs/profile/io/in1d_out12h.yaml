@@ -1,0 +1,8 @@
+# I/O window: 1-day input (48 steps), 12-hour output (24 steps).
+
+data:
+  timeseries:
+    input_start: -48
+    input_end: 0
+    target_start: 0
+    target_end: 24

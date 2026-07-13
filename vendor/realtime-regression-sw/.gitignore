@@ -1,0 +1,63 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+*.egg
+dist/
+build/
+.eggs/
+
+# Virtual environments
+.env
+.venv
+env/
+venv/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+*~
+
+# Testing / Coverage
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Type checkers / Linters
+.mypy_cache/
+.ruff_cache/
+
+# Claude Code
+.claude/
+CLAUDE.md
+
+# Rendered docs (HTML exports)
+*.html
+
+# Logs / runtime / scratch
+*.log
+*.out
+tmp.py
+
+# Project-specific: generated artifacts
+dataset/events/*.csv
+dataset/cache/**
+results/**
+
+# Large model artifacts (user-provided or downloaded)
+*.pth
+*.pkl
+
+# Keep folder structure
+!dataset/events/.gitkeep
+!dataset/cache/.gitkeep
+!results/predictions/.gitkeep
+!tests/fixtures/**

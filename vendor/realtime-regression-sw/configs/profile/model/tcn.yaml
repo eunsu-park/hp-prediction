@@ -1,0 +1,4 @@
+# Temporal Convolutional Network.
+
+model:
+  model_type: "tcn"

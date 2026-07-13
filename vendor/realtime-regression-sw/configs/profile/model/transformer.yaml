@@ -1,0 +1,4 @@
+# Transformer encoder.
+
+model:
+  model_type: "transformer"

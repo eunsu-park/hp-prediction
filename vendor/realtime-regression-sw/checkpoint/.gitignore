@@ -1,0 +1,5 @@
+# Self-contained deployment repo: the model checkpoint is committed in-tree,
+# overriding the engine-level *.pth / *.pkl ignore rules so the forecast can run
+# without downloading a GitHub Release.
+!model_best.pth
+!table_stats.pkl

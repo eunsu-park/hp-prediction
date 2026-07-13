@@ -1,0 +1,69 @@
+# CI runtime configuration for GitHub Actions runners.
+# Paths are relative to the vendor/realtime-regression-sw/ working directory.
+# Active profile: in12h_out12h_gnn_patchtst (12-hour input, 12-hour / 24-step
+# hp30 forecast). The workflow runs
+# `run_realtime.py --config ../../configs/realtime.ci.yaml`, then
+# scripts/update_site_data.py copies results/predictions/* into site/data/.
+
+profile:
+  name: "in12h_out12h_gnn_patchtst"
+  target: "hp30"              # forecast the hp30 index (input = 21 SW + hp30)
+  io: "in12h_out12h"          # 12-hour input (24 steps), 12-hour output (24 steps)
+  model: "gnn_patchtst"       # GNN with PatchTST temporal backend
+
+experiment:
+  name: "in12h_out12h_gnn_patchtst"
+
+paths:
+  checkpoint: "./checkpoint/model_best.pth"
+  stats_file: "./checkpoint/table_stats.pkl"
+  event_dir: "./dataset/events"
+  cache_dir: "./dataset/cache"
+  results_dir: "./results"
+
+sources:
+  noaa_plasma_url: "https://services.swpc.noaa.gov/json/rtsw/rtsw_wind_1m.json"
+  noaa_mag_url:    "https://services.swpc.noaa.gov/json/rtsw/rtsw_mag_1m.json"
+  gfz_hpo_url:     "https://www-app3.gfz-potsdam.de/kp_index/Hp30_ap30_nowcast.txt"
+  download_timeout: 30
+  max_retries: 3
+
+window:
+  lookback_steps: 24          # 12 hours × 2 steps/hour
+  forecast_steps: 24          # 12 hours × 2 steps/hour
+  boundary_offset_minutes: 2
+
+runtime:
+  device: "cpu"
+  # "Always emit" policy: keep the anchor at now and impute missing inputs
+  # (carry the last value forward) so a forecast is produced every run, even when
+  # recent data is delayed/missing. Degraded inputs are reflected in
+  # missing_data_filled_fraction (the page warns when it is high).
+  missing_data:
+    max_gap_fraction: 0.9          # emit unless a variable is almost entirely missing
+    ffill_limit_steps: 48          # carry the last value forward across long tail gaps
+    require_recent_steps_present: 0  # do not require the most recent steps to be real
+    anchor_rollback_max_attempts: 2  # last-resort fallback if the current anchor is unfillable
+
+# MCD enabled so the site can render ±2σ uncertainty bands on the forecast.
+# Plot and attention artifacts are still skipped — the site only needs JSON.
+analysis:
+  plot:
+    enable: false
+    history_steps: 96
+    dpi: 120
+  mcd:
+    enable: true
+    num_samples: 100
+    n_std: 2.0
+  attention:
+    enable: false
+    save_npz: false
+
+# TODO(hp): fill in from hp_in12h_out12h_gnn_patchtst training once complete,
+# and commit the matched model_best.pth + table_stats.pkl into checkpoint/.
+model_provenance:
+  val_loss_at_train: null
+  val_mae_at_train: null       # hp30-specific MAE (TBD)
+  val_rmse_at_train: null      # hp30-specific RMSE (TBD)
+  trained_on_epoch: null

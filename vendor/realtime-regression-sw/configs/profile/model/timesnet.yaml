@@ -1,0 +1,4 @@
+# FFT + 2D Inception (TimesNet).
+
+model:
+  model_type: "timesnet"

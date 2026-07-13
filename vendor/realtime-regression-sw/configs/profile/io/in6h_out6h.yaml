@@ -1,0 +1,12 @@
+# I/O window: 6-hour input (12 steps), 6-hour output (12 steps).
+
+data:
+  timeseries:
+    input_start: -12
+    input_end: 0
+    target_start: 0
+    target_end: 12
+
+model:
+  patch_len: 4
+  patch_stride: 2
