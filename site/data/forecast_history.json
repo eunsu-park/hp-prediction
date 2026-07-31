@@ -1,26 +1,5 @@
 [
   {
-    "target_timestamp_utc": "2026-07-29T04:00:00Z",
-    "hp30": 1.9,
-    "lower": 1.1,
-    "upper": 3.0,
-    "status": "ok"
-  },
-  {
-    "target_timestamp_utc": "2026-07-29T04:30:00Z",
-    "hp30": 0,
-    "lower": 0,
-    "upper": 0,
-    "status": null
-  },
-  {
-    "target_timestamp_utc": "2026-07-29T05:00:00Z",
-    "hp30": 2.8,
-    "lower": 1.9,
-    "upper": 3.6,
-    "status": "ok"
-  },
-  {
     "target_timestamp_utc": "2026-07-29T05:30:00Z",
     "hp30": 0,
     "lower": 0,
@@ -676,6 +655,27 @@
     "hp30": 1.6,
     "lower": 1.0,
     "upper": 2.2,
+    "status": "ok"
+  },
+  {
+    "target_timestamp_utc": "2026-07-31T04:30:00Z",
+    "hp30": 0,
+    "lower": 0,
+    "upper": 0,
+    "status": null
+  },
+  {
+    "target_timestamp_utc": "2026-07-31T05:00:00Z",
+    "hp30": 0,
+    "lower": 0,
+    "upper": 0,
+    "status": null
+  },
+  {
+    "target_timestamp_utc": "2026-07-31T05:30:00Z",
+    "hp30": 4.6,
+    "lower": 3.1,
+    "upper": 5.4,
     "status": "ok"
   }
 ]
