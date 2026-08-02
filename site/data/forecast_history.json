@@ -1,12 +1,5 @@
 [
   {
-    "target_timestamp_utc": "2026-07-31T17:00:00Z",
-    "hp30": 0.7,
-    "lower": 0.5,
-    "upper": 0.8,
-    "status": "ok"
-  },
-  {
     "target_timestamp_utc": "2026-07-31T17:30:00Z",
     "hp30": 0,
     "lower": 0,
@@ -676,6 +669,13 @@
     "hp30": 5.5,
     "lower": 4.1,
     "upper": 6.5,
+    "status": "ok"
+  },
+  {
+    "target_timestamp_utc": "2026-08-02T17:30:00Z",
+    "hp30": 5.7,
+    "lower": 4.1,
+    "upper": 6.9,
     "status": "ok"
   }
 ]
