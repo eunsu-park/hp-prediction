@@ -1,9 +1,6 @@
 {
-  "status": "warn",
-  "last_success_utc": "2026-08-02T17:31:27Z",
-  "last_attempt_utc": "2026-08-02T18:02:21Z",
-  "last_error": {
-    "code": 2,
-    "message": "InsufficientDataError — upstream data gap, waiting for next cycle."
-  }
+  "status": "ok",
+  "last_success_utc": "2026-08-02T18:30:01Z",
+  "last_attempt_utc": "2026-08-02T18:30:01Z",
+  "last_error": null
 }
